@@ -41,11 +41,12 @@ a {
     position: fixed;
     z-index: 5;
     width: 100%;
+    min-width: 800px;
     height: 50px;
     padding: 0px;
     top: 0px;
     border-bottom: 3px solid darkslategray;
-    background: url('../images/nyan.gif') no-repeat fixed center;
+    background: white;
 }
 
 #head ul.fleft li {
