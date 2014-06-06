@@ -25,7 +25,7 @@ var centerDOM = function() {
 };
 
 var startSlideShow = function() {
-    var slideshow = $("#slideshow p");
+    var slideshow = $("#slideshow img");
     var properties = {
         "margin-left": "+=16px"
     };

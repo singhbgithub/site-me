@@ -27,6 +27,11 @@ a {
     color: darkslategray;
 }
 
+#me {
+  border: 5px solid teal;
+  border-radius: 5px;
+}
+
 /* Style for the fixed header */
 #mainTitle {
     display: inline-block;
@@ -93,7 +98,7 @@ a {
     background: cornflowerblue;
 }
 
-/* fixed bottom contact  TODO abstract with #head css */
+/* fixed contact bar */
 #contact {
     position: fixed;
     z-index: 4;
@@ -111,4 +116,9 @@ a {
 }
 #contact:hover {
     background: rgba(255, 255, 255, 1);
+}
+
+/* place the lifter */
+#lifter {
+    padding: 16px;
 }
