@@ -27,6 +27,11 @@ a {
     color: darkslategray;
 }
 
+.hl:hover {
+  background: gray;
+  border-radius: 5px;
+}
+
 #me {
   border: 5px solid teal;
   border-radius: 5px;
@@ -104,11 +109,10 @@ a {
     z-index: 4;
     width: 50px;
     height: 320px;
-    padding: 0px;
+    padding: 16px 0px 0px 2px;
     top: 50%;
     margin-top: -160px;
     right: 0px;
-    bottom: 0px;
     border-bottom: 3px solid darkslategray;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
