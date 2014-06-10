@@ -2,7 +2,6 @@
 html, body {
     height: 100%;
     width: 100%;
-    min-width: 800px;
     margin: 0px;
 }
 
@@ -32,9 +31,13 @@ a {
   border-radius: 5px;
 }
 
-#me {
-  border: 5px solid teal;
-  border-radius: 5px;
+.circular {
+  width: 430px;
+  height: 430px;
+  border-radius: 215px;
+  -webkit-border-radius: 215px;
+  -moz-border-radius: 215px;
+  background: url(../images/me.jpg) no-repeat center;
 }
 
 /* Style for the fixed header */
@@ -91,6 +94,27 @@ a {
 }
 
 /* All the other style */
+#music {
+  position: fixed;
+  right: -170px;
+  bottom: 16px;
+  width: 250px;
+  height: 80px;
+  padding: 0px;
+}
+
+#music:hover {
+  right: -5px;
+}
+
+#music iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid darkslategray;
+  border-bottom-left-radius: 5px;
+}
+
 #about {
     background:powderblue;
 }
