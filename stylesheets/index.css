@@ -26,18 +26,53 @@ a {
     color: darkslategray;
 }
 
+/* highlight background */
 .hl:hover {
-  background: gray;
+  background: darkslategray;
   border-radius: 5px;
 }
 
 .circular {
   width: 430px;
   height: 430px;
+  border: 3px solid darkslategray;
   border-radius: 215px;
   -webkit-border-radius: 215px;
   -moz-border-radius: 215px;
   background: url(../images/me.jpg) no-repeat center;
+}
+
+/* center div horizontally */
+#about .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.triangle-isosceles {
+  position: relative;
+  width: 500px;
+  padding: 32px;
+  margin: 3em 0 3em;
+  color: black;
+  background: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* creates triangle */
+.triangle-isosceles:after {
+  content: "";
+  position: absolute;
+  top: -25px; /* value = - border-top-width - border-bottom-width */
+  left: 100px; /* controls horizontal position */
+  border-width: 0 20px 25px; /* vary these values to change the angle of the vertex */
+  border-style: solid;
+  border-color: white transparent;
+  /* reduce the damage in FF3.0 */
+  display: block;
+  width: 0;
 }
 
 /* Style for the fixed header */
@@ -62,7 +97,7 @@ a {
     top: 0px;
     border-bottom: 3px solid darkslategray;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-night-radius: 5px;
     background: rgba(255, 255, 255, .8);
 }
 
@@ -101,6 +136,7 @@ a {
   width: 250px;
   height: 80px;
   padding: 0px;
+  z-index: 1;
 }
 
 #music:hover {
@@ -113,6 +149,7 @@ a {
   border: none;
   border-bottom: 3px solid darkslategray;
   border-bottom-left-radius: 5px;
+  box-shadow: 5px 5px 3px black;
 }
 
 #about {
@@ -141,6 +178,7 @@ a {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     background: rgba(255, 255, 255, .8);
+    box-shadow: 5px 5px 3px black;
 }
 #contact:hover {
     background: rgba(255, 255, 255, 1);
