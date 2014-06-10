@@ -12,18 +12,12 @@ var MILLIS_TO_SECS = 1000;
   Main start script
 */
 $(document).ready(function() {
-    centerDOM();
     startSlideShow();
 });
 
-var centerDOM = function() {
-    $(".center").css({
-       "margin-left":"auto",
-        "margin-right":"auto",
-        "color":"blue"
-    });
-};
-
+/* 
+  start slideshow animation
+*/
 var startSlideShow = function() {
     var slideshow = $("#slideshow img");
     var properties = {
@@ -39,5 +33,11 @@ var startSlideShow = function() {
         }
     };
     slideshow.animate(properties, options);
-    
+};
+
+/*
+  Show the spotify music player with some swag
+*/
+var showMusicWithSwag = function() {
+
 };
