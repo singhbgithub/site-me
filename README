@@ -1,14 +1,23 @@
 About
 -----
-This is a java server application designed to host bhavneetsingh.com.
+This project is meant to create my personal website. I'm using scrum and 
+test driven methodologies to drive feature development. This project is a means
+to learn more about the web, how front-end and back-end interact, multi-
+threaded applications, asynchronous applications, build tools, and networks.
+Furthermore, I will explore 3rd party libraries and frameworks to get a feel
+for the pros and cons.
 
-Currently, the site is not up.
+This project starts out using netty (server), mysql (back-end), and bootstrap (front-end).
+
+Once a stable version of the project is released, new projects will be created to explore other MVC's with alternate framework combinations.
+
+Currently, the site is in development, and has not had a release yet.
 
 
 
 Version Control Information
 ---------------------------
-Using git.
+Using git, obviously.
 
 
 
@@ -27,6 +36,8 @@ Test-driven development (well not just yet, project isn't fully setup yet)
 
 Project Setup
 -------------
+Go into the tools/ directory.
+Read the README for setup instructions.
 
 
 
