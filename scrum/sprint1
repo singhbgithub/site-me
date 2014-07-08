@@ -1,0 +1,48 @@
+Sprint Period:
+Sunday, July 6th
+Saturday, July 20th
+
+Sprint Backlog                                           Status
+---------------------------------------------------------------
+- Setup development environment                     In Progress
+
+  > Setup project layout (directory structure)      Done
+  > Use git version control                         Done
+  > Build using ant                                 Not Started
+  > Test-driven development                         Not Started
+  > Make development setup script                   Not Started
+
+
+
+- Get server up and running                         In Progress
+  > Create java project                             Done
+  > Create server using netty                       Done
+  > Create web API handler                          Done
+  > Development testing                             In Progress
+
+
+
+- Put server on a secure port                       In Progress
+
+  > Use nginx to reverse proxy from HTTPS port      Done 
+
+
+
+- Keep track of project layout, dependencies,       Done
+  scrum history, backlogs etc.
+
+  > Created README
+  > Created scrum folder
+
+
+
+- Create a database                                 In Progress
+  > Determine database to use                       Done
+  > Using mysql                                     Not Started
+  > Obtain JDBC connector for mysql                 Not Started
+  > Create database through server                  Not Started
+  > Create database API on server                   Not Started
+
+
+
+- Add authorization capabilities                    Not Started

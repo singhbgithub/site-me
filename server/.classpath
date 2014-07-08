@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jar/gson-2.2.4.jar" sourcepath="jar/gson-2.2.4-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WebServer/jar/gson-2.2.4-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="jar/netty-all-4.0.20.Final.jar" sourcepath="jar/netty-all-4.0.20.Final-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WebServer/jar/netty-all-4.0.20.Final-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

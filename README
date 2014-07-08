@@ -1,0 +1,39 @@
+About
+-----
+This is a java server application designed to host bhavneetsingh.com.
+
+Currently, the site is not up.
+
+
+
+Version Control Information
+---------------------------
+Using git.
+
+
+
+Build Information
+-----------------
+Using ant.
+
+
+
+Development Methodology
+-----------------------
+Scrum (well 'pseudo-scrum' since I'm the entire development team, scrum master, product owner, and only stakeholder)
+Test-driven development (well not just yet, project isn't fully setup yet)
+
+
+
+Project Setup
+-------------
+
+
+
+3rd Party Libraries
+-------------------
+ant - java build tool
+log4j - java logging library
+gson - google's json to java object
+netty - lightweight asynchronous event-driven network framework, used as HTTP server
+nginx - high-performance HTTP server and reverse proxy
