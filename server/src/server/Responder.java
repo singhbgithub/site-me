@@ -1,7 +1,11 @@
 package server;
 
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.HttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 
 import com.google.gson.JsonObject;
 
@@ -18,6 +22,8 @@ public abstract class Responder {
 	 */
 	public static final void sendHttpResponse(ChannelHandlerContext ctx, HttpRequest req, String msg) {
 		System.out.println("Success: " + msg + "\n" + req.getUri());// TODO
+		HttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+		ctx.write(response);
 	};
 	
 	/**
