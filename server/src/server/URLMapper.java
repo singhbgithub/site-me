@@ -15,7 +15,7 @@ public final class URLMapper {
 	// prevent instantiation by other classes
 	private URLMapper() {
 		URLS = new HashMap<String, Responder>();
-		URLS.put("/pass/admin/reset", new UserCreator());
+		URLS.put("/admin/reset", new UserCreator());
 		// TODO add meaningful URL APIs
 	}
 	

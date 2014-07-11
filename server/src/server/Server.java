@@ -36,7 +36,7 @@ public final class Server {
             b.option(ChannelOption.SO_BACKLOG, 1024);
             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.INFO))
+             .handler(new LoggingHandler(LogLevel.INFO)) // TODO change to log4j
              .childHandler(new ServerInitializer());
 
             Channel ch = b.bind(PORT).sync().channel();
