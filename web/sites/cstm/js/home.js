@@ -13,6 +13,7 @@ var MILLIS_TO_SECS = 1000;
 */
 $(document).ready(function() {
     startSlideShow();
+    test();
 });
 
 /* 
@@ -40,4 +41,21 @@ var startSlideShow = function() {
 */
 var showMusicWithSwag = function() {
 
+};
+
+/*
+  Test button FIXME remove
+*/
+var test = function() {
+    $("#test").submit(function(evnt) {
+        evnt.preventDefault();
+        var uri = "/pass/admin/reset";
+        var data = JSON.stringify({
+            "hi": "ho"
+        });
+        var callback = function(response) {
+            alert(response);
+        };
+        $.post(uri, data, callback);
+    });
 };

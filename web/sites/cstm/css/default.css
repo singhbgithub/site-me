@@ -42,7 +42,7 @@ a {
   border-radius: 215px;
   -webkit-border-radius: 215px;
   -moz-border-radius: 215px;
-  background: url(../images/me.jpg) no-repeat center;
+  background: url(/static/img/me.jpg) no-repeat center;
 }
 
 /* creates comment bubble */
