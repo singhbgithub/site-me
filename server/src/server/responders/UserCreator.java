@@ -24,9 +24,11 @@ public class UserCreator extends Responder {
 			JsonParser parser = new JsonParser(); // Should use 1 static parser instance?
 			JsonObject json = parser.parse(content).getAsJsonObject();
 			
-			if (json.has("user")) {
+			if (json.has("user") && json.has("password")) { // TODO add e-mail
+				String user = json.get("user").getAsString();
+				String password = json.get("password").getAsString();
 				// add user to db TODO
-				sendHttpResponse(ctx, req, "Found user!");
+				sendHttpResponse(ctx, req, "Added user!");
 			}
 			else {
 				sendHttpError(ctx, req, "No user.");

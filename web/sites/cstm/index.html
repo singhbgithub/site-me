@@ -82,8 +82,12 @@
      <a target="blank" href="/static/docs/resume.pdf"><img class="hl" src="/static/img/resume.png"></img></a>
     </div>
 
+<!-- TODO delete -->
     <form id="test">
-        <input type="submit" value="click me">
+      <!-- should be enforced in the server TODO -->
+      <input type="text" pattern=".{6,15}" name="user" required>
+      <input type="password" pattern=".{6,20}" name="p1" required> 
+      <input type="submit" value="click me">
     </form>
   </body>
   

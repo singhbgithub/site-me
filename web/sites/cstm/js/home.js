@@ -44,14 +44,17 @@ var showMusicWithSwag = function() {
 };
 
 /*
-  Test button FIXME remove
+  FIXME this function belongs in another file
 */
 var test = function() {
     $("#test").submit(function(evnt) {
         evnt.preventDefault();
         var uri = "/pass/admin/reset";
+        var user = $("#test input[name='user']").val();
+        var password = $("#test input[name='p1']").val(); // TODO add pass check
         var data = JSON.stringify({
-            "hi": "ho"
+            "user": user,
+            "password":password 
         });
         var callback = function(response) {
             alert(response);
