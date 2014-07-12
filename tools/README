@@ -1,3 +1,54 @@
+ABOUT
+-----
+
 This directory will house tools that are meant to perform project specific tasks.
 Primarily, this will house development environment setup scripts; it will also
 house deployment scripts.
+
+The web application can only be setup on Unix machines. Sorry Windows (not really).
+
+Please make sure that the scripts have executable permissions.
+
+> ls -l
+-rw-r--r--  1 user  group   1.0K Jul 12 18:13 README
+-rwxr-xr-x  1 user  group   1.8K Jul 12 17:59 app.sh*
+-rwxr-xr-x  1 user  group     0B Jul 12 18:01 setup.sh*
+
+If you don't see the x, run:
+
+chmod +x *.sh
+
+
+
+SCRIPTS
+-------
+
+app.sh
+
+  app.sh starts the required processes that are used to start the web application. 
+  This includes nginx, mysql, and the java server application. 
+
+  Options:
+
+  start
+    This option starts the required processes.
+
+  stop
+    This option stops the required processes.
+
+
+
+setup.sh
+
+  setup.sh downloads all dependencies that the web application requires.
+  This includes nginx, mysql, and java binaries. The directory /opt/site-me/
+  will be created, and all project related files, including the downloaded
+  binaries, will be stored here.
+
+  Options:
+
+  install
+    This option performs the setup.
+
+  uninstall
+    This option removes the setup.
