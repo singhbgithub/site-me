@@ -10,19 +10,21 @@ Sprint Backlog                                           Status
   > Use git version control                         Done
   > Build using ant                                 Not Started
   > Test-driven development                         Not Started
-  > Make development setup script                   Not Started
+  > Make setup script                               In Progress
+    * setup nginx directories
+  > Distinguish between production & development    In Progress
+    setup/deployment scripts
 
 
-
-- Get server up and running                         In Progress
+- Get server up and running                         Done
   > Create java project                             Done
   > Create server using netty                       Done
   > Create web API handler                          Done
-  > Development testing                             In Progress
+  > Development testing                             Done
 
 
 
-- Put server on a secure port                       In Progress
+- Put server on a secure port                       Done
 
   > Use nginx to reverse proxy from HTTPS port      Done 
 
@@ -31,18 +33,27 @@ Sprint Backlog                                           Status
 - Keep track of project layout, dependencies,       Done
   scrum history, backlogs etc.
 
-  > Created README
-  > Created scrum folder
+  > Created README                                  Done
+  > Created scrum folder                            Done
 
 
 
 - Create a database                                 In Progress
   > Determine database to use                       Done
-  > Using mysql                                     Not Started
-  > Obtain JDBC connector for mysql                 Not Started
+  > Use mysql                                       Done
+  > Obtain JDBC connector for mysql                 Done
+  > Add JDBC mysql jar to project                   Done
+  > Add to classpath                                Done
   > Create database through server                  Not Started
   > Create database API on server                   Not Started
 
 
 
-- Add authorization capabilities                    Not Started
+- Add authorization capabilities                    In Progress
+  > Determine encyption hash, MD5 or SHA1           In Progress
+  > Determine salt, fixed, random, both             Not Started
+  > Determine iteration count (1000+)               Not Started
+  > Add users table to database                     Not Started
+  > Determine columns for users table               Not Started
+  > Add add user registration web API               In Progress
+  
