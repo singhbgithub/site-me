@@ -26,8 +26,12 @@ public final class Server {
     // map of supported URLS (API Calls)
     public static final Map<String, Responder> URL_MAPPER = URLMapper.getInstance();
 
-    // Launch the server.
-    public static void main(String[] args) throws Exception {
+    /**
+     * Launch the server.
+     * @throws Exception
+     * @return true if the server launched successfully.
+     */
+    public static boolean launchServer() {
     	// server configuration details
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -42,12 +46,17 @@ public final class Server {
             Channel ch = b.bind(PORT).sync().channel();
 
             System.out.println("Open your web browser and navigate to "
-            		+ "http://127.0.0.1:" + PORT + '/');
-
+            		+ "http://127.0.0.1:" + PORT + '/'); // TODO log message
             ch.closeFuture().sync();
-        } finally {
+            
+            return true;
+        } catch (InterruptedException e) {
+			// TODO log? 
+			e.printStackTrace();
+		} finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
+        return false;
     }
 }

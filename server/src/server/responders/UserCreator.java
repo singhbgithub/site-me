@@ -27,7 +27,8 @@ public class UserCreator extends Responder {
 			if (json.has("user") && json.has("password")) { // TODO add e-mail
 				String user = json.get("user").getAsString();
 				String password = json.get("password").getAsString();
-				// add user to db TODO
+				// add users to db TODO
+				//registerNewUser(user, password);
 				sendHttpResponse(ctx, req, "Added user!");
 			}
 			else {
