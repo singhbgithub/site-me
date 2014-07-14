@@ -6,8 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * This class handles all database related actions.
- * TODO explain further
+ * This class handles all database related actions; specifically,
+ * it provides an API to interact with MYSQL to help ensure safe
+ * and consistent database calls. 
+ *
+ * TODO check connection, and if so, notify any client facing 
+ * APIs of failure.
+ * 
+ * TODO Add database data structures, load those into tables.
+ * This would allow for:
+ * JSON => Java Object => Database record
+ * 
  */
 public final class DatabaseHandler {
 	
@@ -104,5 +113,27 @@ public final class DatabaseHandler {
 		else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Registers a new user
+	 * @param user
+	 * @param password
+	 * @return true if the user was successfully registered
+	 * TODO check if the user already exists
+	 */
+	public static boolean registerUser(String user, String password, String email) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(String.format("INSERT INTO users VALUES (%s,%s,%s)",
+				user, password, email));
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql.toString());
+			stmt.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO log
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
