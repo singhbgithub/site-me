@@ -6,28 +6,28 @@ import java.util.Map;
 import server.responders.UserCreator;
 
 /**
- * Singleton Instance of URL routing.
+ * Singleton Instance of URI routing.
  */
-public final class URLMapper {
+public final class URIMapper {
 	// underlying URL map
-	private static Map<String, Responder> URLS = null;
+	private static Map<String, Responder> URIS = null;
 	
 	// prevent instantiation by other classes
-	private URLMapper() {
-		URLS = new HashMap<String, Responder>();
-		URLS.put("/admin/reset", new UserCreator());
+	private URIMapper() {
+		URIS = new HashMap<String, Responder>();
+		URIS.put("/admin/reset", new UserCreator());
 		// TODO add meaningful URL APIs
 	}
 	
 	/**
-	 * Return the supported URLS.
-	 * @return The supported URLS.
+	 * Return the supported URIS.
+	 * @return The supported URIS.
 	 */
 	public static final Map<String, Responder> getInstance() {
 		// initialize the map
-		if (URLS == null) {
-			new URLMapper();
+		if (URIS == null) {
+			new URIMapper();
 		}
-		return URLS;
+		return URIS;
 	}
 }
