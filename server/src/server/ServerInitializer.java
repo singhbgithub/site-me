@@ -8,12 +8,18 @@ import io.netty.handler.codec.http.HttpServerCodec;
 /**
  * Initialize server channels, handlers.
  */
-public class ServerInitializer extends ChannelInitializer<SocketChannel> {
+final class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
+	// initialize with server options
+	private final Server server;
+	ServerInitializer(Server server) {
+		this.server = server;
+	}
+	
     @Override
     public void initChannel(SocketChannel ch) {
         ChannelPipeline p = ch.pipeline();
         p.addLast(new HttpServerCodec()); // Configure HTTP Chunk, decoder, encoder options. TODO
-        p.addLast(new ServerHandler());
+        p.addLast(new ServerHandler(server));
     }
 }

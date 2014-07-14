@@ -10,9 +10,15 @@ import io.netty.util.CharsetUtil;
  * Handles incoming HTTP requests and delegate to the correct {@link Responder}
  * to respond.
  */
-public final class ServerHandler extends SimpleChannelInboundHandler<Object> {
+final class ServerHandler extends SimpleChannelInboundHandler<Object> {
 	private HttpRequest req;
 	private Responder responder;
+	// server options
+	private final Server server;
+	
+	ServerHandler(Server server) {
+		this.server = server;
+	}
 	
 	/** Finished receiving message. */
     @Override
@@ -34,7 +40,7 @@ public final class ServerHandler extends SimpleChannelInboundHandler<Object> {
         	
         	// get responder for URI
         	String uri = req.getUri();
-            responder = Server.URL_MAPPER.get(uri);
+            responder = server.uris.get(uri);
             // get UTF-8 decoded content
             String content = ((HttpContent) msg).content().toString(CharsetUtil.UTF_8);
             

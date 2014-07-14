@@ -22,16 +22,22 @@ import java.util.Map;
  */
 public final class Server {
 	// port to listen for requests on
-    private static final int PORT = 8000;
-    // map of supported URLS (API Calls)
-    public static final Map<String, Responder> URL_MAPPER = URLMapper.getInstance();
+    private final int port;
+    // map of supported URIs (API calls)
+    final Map<String, Responder> uris;
 
+    // initialize server on a port, and supported APIs
+    public Server(int port, Map<String, Responder> uris) {
+    	this.port = port;
+    	this.uris = uris;
+    }
+    
     /**
      * Launch the server.
      * @throws Exception
      * @return true if the server launched successfully.
      */
-    public static boolean launchServer() {
+    public boolean launchServer() {
     	// server configuration details
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -41,12 +47,12 @@ public final class Server {
             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
              .handler(new LoggingHandler(LogLevel.INFO)) // TODO change to log4j
-             .childHandler(new ServerInitializer());
+             .childHandler(new ServerInitializer(this));
 
-            Channel ch = b.bind(PORT).sync().channel();
+            Channel ch = b.bind(port).sync().channel();
 
             System.out.println("Open your web browser and navigate to "
-            		+ "http://127.0.0.1:" + PORT + '/'); // TODO log message
+            		+ "http://127.0.0.1:" + port + '/'); // TODO log message
             ch.closeFuture().sync();
             
             return true;

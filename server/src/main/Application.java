@@ -1,37 +1,57 @@
 package main;
 
 import server.Server;
+import server.URIMapper;
 import database.DatabaseHandler;
 
 /**
- * Main application. TODO describe better
+ * This is the main application; it's role is to launch the Netty web server,
+ * connect to MYSQL database server and create relevant schema, and initialize/launch
+ * all other components. This application is designed for Unix based systems. 
  * 
- * Launches the application web server as well as
- * connects to the database server.
+ * If a connection cannot be established to MYSQL server, the application will exit
+ * with status 10.
  * 
- * TODO clean shutdown
+ * If the Netty web server component cannot be launched, the database connection is
+ * closed, and the application will exit with status 20.
+ * 
+ * Upon normal program exit or termination, the application will shutdown the server
+ * gracefully and disconnect the database connection after committing pending 
+ * transactions. The program is not robust against SIGKILL or thunderstorms.
  */
 public class Application {
+	
 	public static void main(String[] args) {
 		// try to connect to the database
 		if (DatabaseHandler.connectDatabase()) {
-		    System.out.println("Database connected.");
+			
+		    System.out.println("Database connected."); // TODO log
+			// initialize web server options
+		    Server server = new Server(8000, URIMapper.getInstance());
+			
 			// try to launch the server
-			if (Server.launchServer()) {
-				// TODO do anything here?
-			    System.out.println("Server running.");
+			if (server.launchServer()) {
+				
+			    System.out.println("Server running."); // TODO log
+			    
 			}
 			// disconnect the database, shutdown application with error
 			else {
-				System.err.println("Could start server.");
+				
+				System.err.println("Could not start server."); // TODO log?
 				DatabaseHandler.disconnectDatabase();
 				System.exit(20);
+				
 			};
 		}
 		// could not connect to database, shutdown application with error
 		else {
-			System.err.println("Could connect database.");
+			
+			System.err.println("Could connect database."); // TODO log?
 			System.exit(10);
+			
 		};
 	}
 }
+
+
