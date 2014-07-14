@@ -23,12 +23,14 @@ public class Application {
 			}
 			// disconnect the database, shutdown application with error
 			else {
+				System.err.println("Could start server.");
 				DatabaseHandler.disconnectDatabase();
 				System.exit(20);
 			};
 		}
 		// could not connect to database, shutdown application with error
 		else {
+			System.err.println("Could connect database.");
 			System.exit(10);
 		};
 	}

@@ -44,7 +44,8 @@ Sprint Backlog                                           Status
   > Obtain JDBC connector for mysql                 Done
   > Add JDBC mysql jar to project                   Done
   > Add to classpath                                Done
-  > Create database through server                  Not Started
+  > Create database through server                  Done
+  > Create tables for database                      Done
   > Create database API on server                   Not Started
 
 
