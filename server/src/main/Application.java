@@ -19,7 +19,7 @@ import database.DatabaseHandler;
  * gracefully and disconnect the database connection after committing pending 
  * transactions. The program is not robust against SIGKILL or thunderstorms.
  */
-public class Application {
+public final class Application {
 	
 	public static void main(String[] args) {
 		// try to connect to the database
@@ -33,7 +33,7 @@ public class Application {
 			if (server.launchServer()) {
 				
 			    System.out.println("Server running."); // TODO log
-			    
+			    shutdownGracefully();
 			}
 			// disconnect the database, shutdown application with error
 			else {
@@ -52,6 +52,28 @@ public class Application {
 			
 		};
 	}
+	
+	/**
+	 * Adds shutdown hook to ensure all application modules clean up
+	 * and close connections before the application terminates.
+	 */
+	private static void shutdownGracefully() {
+		
+		Runtime.getRuntime().addShutdownHook(new Thread(new Shutdown()));
+	}
 }
 
-
+/**
+ * Shutdown the application gracefully. The Netty server framework
+ * already provides a shutdown gracefully method; this is called
+ * in the {@link Server} launchMethod.
+ */
+class Shutdown implements Runnable {
+	
+	@Override
+	public void run() {
+		// close the database connection
+		DatabaseHandler.disconnectDatabase();
+	}
+	
+}
