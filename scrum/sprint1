@@ -38,7 +38,7 @@ Sprint Backlog                                           Status
 
 
 
-- Create a database                                 In Progress
+- Create a database                                 Done
   > Determine database to use                       Done
   > Use mysql                                       Done
   > Obtain JDBC connector for mysql                 Done
@@ -46,7 +46,7 @@ Sprint Backlog                                           Status
   > Add to classpath                                Done
   > Create database through server                  Done
   > Create tables for database                      Done
-  > Create database API on server                   Not Started
+  > Create database API on server                   Done
 
 
 
@@ -54,7 +54,8 @@ Sprint Backlog                                           Status
   > Determine encyption hash, MD5 or SHA1           In Progress
   > Determine salt, fixed, random, both             Not Started
   > Determine iteration count (1000+)               Not Started
-  > Add users table to database                     Not Started
-  > Determine columns for users table               Not Started
-  > Add add user registration web API               In Progress
+  > Add users table to database                     Done
+  > Determine columns for users table               Done
+  > Add add user registration web API               Done
+  > Add user deregistration web API                 In Progress
   

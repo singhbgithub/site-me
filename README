@@ -9,7 +9,7 @@ for the pros and cons.
 
 This project starts out using netty (server), mysql (back-end), and bootstrap (front-end).
 
-Once a stable version of the project is released, new projects will be created to explore other MVC's with alternate framework combinations.
+Once a stable version of the project is released, new projects will be created to explore other MVC framework combinations.
 
 Currently, the site is in development, and has not had a release yet.
 

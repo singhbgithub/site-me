@@ -1,5 +1,7 @@
 package server.responders;
 
+import java.sql.SQLException;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpRequest;
 import server.Responder;
@@ -8,47 +10,32 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 
-import database.DatabaseHandler;
+import database.types.UserData;
+import database.types.UserData.PasswordException;
 
 /**
- * This class creates a new user in the database.
- * 
- * TODO:
- * - User needs to have password.
- * - Clean way of adding new information to a user without corrupting old data entries.
- * - Encoding password.
+ * This class handles incoming requests dealing with user creation.
  */
-public class UserCreator extends Responder {
+public final class UserCreator extends Responder {
 
 	@Override
 	public void processRequest(ChannelHandlerContext ctx, HttpRequest req, String content) {
 		try {
 			
-			JsonParser parser = new JsonParser(); // Should use 1 static parser instance? TODO
+			JsonParser parser = new JsonParser();
 			JsonObject json = parser.parse(content).getAsJsonObject();
 			
-			// check for relevant information
-			if (json.has("username") && json.has("password") && json.has("email")) {
-				
-				String user = json.get("username").getAsString();
-				String password = json.get("password").getAsString();
-				String email = json.get("email").getAsString();
-				
-				// add users to database
-				if (DatabaseHandler.registerUser(user, password, email)) {
-					sendHttpResponse(ctx, req, "Added user!");	
-				}
-				// user not added
-				else {
-					sendHttpResponse(ctx, req, "Could not add user.");
-				}
-			}
-			// invalid post data
-			else {
-				sendHttpError(ctx, req, "No user, password, or email in json.");
-			}
+			// attempt to add a new user with posted content
+			UserData.registerUser(json);
+			sendHttpResponse(ctx, req, "Added user!");
+
+			// could not parse posted content
 		} catch (JsonParseException e) {
 			sendHttpError(ctx, req, "Invalid json: " + content);
+			// incorrect key bindings in json or invalid password
+			// SQL Error occurred TODO distinguish username or email exists
+		} catch (PasswordException | IllegalArgumentException | SQLException e) {
+			sendHttpError(ctx, req, e.getMessage());
 		}
 	}
 	

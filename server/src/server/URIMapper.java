@@ -6,7 +6,8 @@ import java.util.Map;
 import server.responders.UserCreator;
 
 /**
- * Singleton Instance of URI routing.
+ * Singleton Instance of URI routing. This is a list
+ * of supported web API calls.
  */
 public final class URIMapper {
 	// underlying URL map
@@ -16,7 +17,6 @@ public final class URIMapper {
 	private URIMapper() {
 		URIS = new HashMap<String, Responder>();
 		URIS.put("/admin/reset", new UserCreator());
-		// TODO add meaningful URL APIs
 	}
 	
 	/**

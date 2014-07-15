@@ -47,7 +47,7 @@ public final class Application {
 		// could not connect to database, shutdown application with error
 		else {
 			
-			System.err.println("Could connect database."); // TODO log?
+			System.err.println("Could not connect database."); // TODO log?
 			System.exit(10);
 			
 		};
@@ -61,19 +61,20 @@ public final class Application {
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Shutdown()));
 	}
-}
-
-/**
- * Shutdown the application gracefully. The Netty server framework
- * already provides a shutdown gracefully method; this is called
- * in the {@link Server} launchMethod.
- */
-class Shutdown implements Runnable {
 	
-	@Override
-	public void run() {
-		// close the database connection
-		DatabaseHandler.disconnectDatabase();
+	/**
+	 * Shutdown the application gracefully. The Netty server framework
+	 * already provides a shutdown gracefully method; this is called
+	 * in the {@link Server} launchMethod.
+	 */
+	private static class Shutdown implements Runnable {
+		
+		@Override
+		public void run() {
+			// close the database connection
+			DatabaseHandler.disconnectDatabase();
+		}
+		
 	}
 	
 }

@@ -52,9 +52,11 @@ var test = function() {
         var uri = "/pass/admin/reset";
         var user = $("#test input[name='user']").val();
         var password = $("#test input[name='p1']").val(); // TODO add pass check
+        var email = $("#test input[name='email']").val();
         var data = JSON.stringify({
-            "user": user,
-            "password":password 
+            "username": user,
+            "password":password,
+            "email":email
         });
         var callback = function(response) {
             alert(response);

@@ -85,8 +85,9 @@
 <!-- TODO delete -->
     <form id="test">
       <!-- should be enforced in the server TODO -->
-      <input type="text" pattern=".{6,15}" name="user" required>
-      <input type="password" pattern=".{6,20}" name="p1" required> 
+      <input type="text" pattern=".{6,15}" name="user" placeholder="username" required>
+      <input type="password" pattern=".{8,32}" name="p1" placeholder="password" required>
+      <input type="email" name="email" placeholder="email" required>
       <input type="submit" value="click me">
     </form>
   </body>

@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import database.types.UserData;
+
 /**
  * This class handles all database related actions; specifically,
  * it provides an API to interact with MYSQL to help ensure safe
@@ -21,11 +23,13 @@ import java.sql.SQLException;
 public final class DatabaseHandler {
 	
 	private static Connection conn = null;
+	// config value? TODO
+	private static final String DB_NAME = "webapp";
 	
 	/**
 	 * Connects to the MYSQL server as the root user.
 	 * Initializes the required 'mysite' database and all
-	 * the associated tables. TODO create db and tables
+	 * the associated tables.
 	 */
 	public static boolean connectDatabase() {
 		// check if already connected
@@ -36,14 +40,15 @@ public final class DatabaseHandler {
 		else if (loadDriver()) {
 			// try to establish connection
 			try {
-			    conn = DriverManager.getConnection("jdbc:mysql://localhost/", "root", ""); // TODO change from localhost?
+				// TODO SHOULD BE READ FROM CONFIG FILE
+			    conn = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "");
 			    initDatabase();
 			    return true;
-			} catch (SQLException ex) {
-			    // handle any errors, TODO log them
-			    System.out.println("SQLException: " + ex.getMessage());
-			    System.out.println("SQLState: " + ex.getSQLState());
-			    System.out.println("VendorError: " + ex.getErrorCode());
+			} catch (SQLException e) {
+			    // TODO log
+			    System.out.println("SQLException: " + e.getMessage());
+			    System.out.println("SQLState: " + e.getSQLState());
+			    System.out.println("VendorError: " + e.getErrorCode());
 			}
 		};
 		// not connected
@@ -52,7 +57,8 @@ public final class DatabaseHandler {
 	
 	/**
 	 * Load the JDBC driver for MYSQL
-	 * @return true if the driver was loaded.
+	 * @return 
+	 * 		True if the driver was loaded.
 	 */
 	private static boolean loadDriver() {
 		try {
@@ -71,30 +77,24 @@ public final class DatabaseHandler {
 	 * @throws SQLException
 	 */
 	private static void initDatabase() throws SQLException {
-		// create the database if not exists
-		StringBuilder sql = new StringBuilder();
-		sql.append("CREATE DATABASE IF NOT EXISTS webapp"); // TODO predefine database name in config file
-		PreparedStatement stmt = conn.prepareStatement(sql.toString());
+		// TODO predefine database name in config file
+		PreparedStatement stmt = conn.prepareStatement(
+				"CREATE DATABASE IF NOT EXISTS " + DB_NAME);
 		stmt.execute();
 		
 		// select the database for usage
-		stmt = conn.prepareStatement("USE webapp");
+		stmt = conn.prepareStatement("USE " + DB_NAME);
 		stmt.execute();
 		
-		// create tables if not exists
-		sql = new StringBuilder();
-		sql.append("CREATE TABLE IF NOT EXISTS users(");
-		sql.append("id INT PRIMARY KEY AUTO_INCREMENT,");
-		sql.append("username VARCHAR(25) NOT NULL,");
-		sql.append("password VARCHAR(65) NOT NULL,");
-		sql.append("email VARCHAR(255) NOT NULL)");
-		stmt = conn.prepareStatement(sql.toString());
+		// create all required schema
+		stmt = conn.prepareStatement(new UserData().getSchema());
 		stmt.execute();
 	}
 	
 	/**
 	 * Close the database connection.
-	 * @return true if the database is not connected.
+	 * @return 
+	 * 		True if the database is not connected.
 	 */
 	public static boolean disconnectDatabase() {
 		// check for existing connection
@@ -116,24 +116,47 @@ public final class DatabaseHandler {
 	}
 	
 	/**
-	 * Registers a new user
-	 * @param user
-	 * @param password
-	 * @return true if the user was successfully registered
-	 * TODO check if the user already exists
+	 * Adds a record with the specified values to the named table.
+	 * The size of the cols and vals arrays should be equivalent.
+	 * @param table
+	 * 		The table to add the record to.
+	 * @param cols
+	 * 		The columns of the record.
+	 * @param vals
+	 * 		The values of the record.
+	 * @throws SQLException 
+	 * 		If a SQL Error occurs.
 	 */
-	public static boolean registerUser(String user, String password, String email) {
-		StringBuilder sql = new StringBuilder();
-		sql.append(String.format("INSERT INTO users VALUES (%s,%s,%s)",
-				user, password, email));
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sql.toString());
+	public static void addRecord(String table, String[] cols, String[] vals) throws SQLException {
+			StringBuilder sb = new StringBuilder();
+			// convert vals array to CSV String
+			for (int i = 0; i < vals.length; i++) {
+				if (sb.length() > 0) {
+					sb.append(",");
+				}
+				sb.append("\"" + vals[i] + "\"");
+			}
+			String values = sb.toString();
+			
+			sb = new StringBuilder();
+			// convert cols array to CSV String
+			for (int i = 0; i < cols.length; i++) {
+				if (sb.length() > 0) {
+					sb.append(",");
+				}
+				sb.append(cols[i]);
+			}
+			String columns = sb.toString();
+			
+			// execute SQL insert statement
+			String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
+					table, columns, values);
+			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.execute();
-			return true;
-		} catch (SQLException e) {
-			// TODO log
-			e.printStackTrace();
-		}
-		return false;
 	}
+	
+	// TODO make an api for deleting records... this may be tricky
+	// considering the WHERE CLAUSE can be any mishmosh of boolean logic
+	// worst case scenario: pass it as a string param
+	
 }
