@@ -15,15 +15,11 @@ import database.types.UserData;
  * TODO check connection, and if so, notify any client facing 
  * APIs of failure.
  * 
- * TODO Add database data structures, load those into tables.
- * This would allow for:
- * JSON => Java Object => Database record
- * 
  */
 public final class DatabaseHandler {
 	
 	private static Connection conn = null;
-	// config value? TODO
+	// config file TODO
 	private static final String DB_NAME = "webapp";
 	
 	/**
@@ -40,7 +36,7 @@ public final class DatabaseHandler {
 		else if (loadDriver()) {
 			// try to establish connection
 			try {
-				// TODO SHOULD BE READ FROM CONFIG FILE
+				// config file TODO
 			    conn = DriverManager.getConnection("jdbc:mysql://localhost/", "root", "");
 			    initDatabase();
 			    return true;
@@ -77,7 +73,6 @@ public final class DatabaseHandler {
 	 * @throws SQLException
 	 */
 	private static void initDatabase() throws SQLException {
-		// TODO predefine database name in config file
 		PreparedStatement stmt = conn.prepareStatement(
 				"CREATE DATABASE IF NOT EXISTS " + DB_NAME);
 		stmt.execute();
@@ -104,7 +99,7 @@ public final class DatabaseHandler {
 				conn.close();
 				return true;
 			} catch (SQLException e) {
-				// TODO log?
+				// TODO log
 				e.printStackTrace();
 			}
 			return false;
@@ -155,8 +150,43 @@ public final class DatabaseHandler {
 			stmt.execute();
 	}
 	
-	// TODO make an api for deleting records... this may be tricky
-	// considering the WHERE CLAUSE can be any mishmosh of boolean logic
-	// worst case scenario: pass it as a string param
+	/**
+	 * Deletes records from the named table that match the given where clause.
+	 * @param table
+	 * 		The table whose records to delete.
+	 * @param where
+	 * 		The WHERE clause.
+	 * @throws SQLException 
+	 * 		If a SQL Error occurs.
+	 */
+	public static void deleteRecords(String table, String where) throws SQLException {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM ").append(table)
+			.append(" WHERE ").append(where);
+			PreparedStatement stmt = conn.prepareStatement(sql.toString());
+			stmt.execute();
+	}
+	
+	/**
+	 * Updates records from the named table that match the given where clause.
+	 * The size of the cols and vals arrays should be equivalent.
+	 * @param table
+	 * 		The table whose records to update.
+	 * @param cols
+	 * 		The columns to update.
+	 * @param vals
+	 * 		The values to update the corresponding columns to.
+	 * @param where
+	 * 		The WHERE clause.
+	 * @throws SQLException 
+	 * 		If a SQL Error occurs.
+	 */
+	public static void updateRecords(String table, String[] cols, String[] vals, String where) throws SQLException {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE FROM ").append(table)
+			.append(" WHERE ").append(where);
+			PreparedStatement stmt = conn.prepareStatement(sql.toString());
+			stmt.execute();
+	}
 	
 }
