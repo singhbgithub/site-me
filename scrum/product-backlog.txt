@@ -1,4 +1,16 @@
 Product Backlog
 ---------------
 - Incorporate full text search
-- Add website 
+
+- Do test driven development
+  > Determine how this can be done
+  > Test web interface
+  > Test server performance
+
+- Add projects to the custom site
+
+- Make a nice one page homepage for the custom site
+
+- Add authentication page; you can't see the custom page without credentials
+
+- The bootstrap site home background image needs to updated
