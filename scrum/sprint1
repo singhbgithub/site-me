@@ -1,22 +1,17 @@
 Sprint Period:
 Sunday, July 6th
-Saturday, July 20th
+Saturday, July 19th
 
 Sprint Backlog                                           Status
 ---------------------------------------------------------------
-- Setup development environment                     In Progress
+- Setup development environment                     Not finished
 
   > Setup project layout (directory structure)      Done
   > Use git version control                         Done
-  > Build using ant                                 Not Started
-  > Test-driven development                         Not Started
-  > Make setup script                               In Progress
-    * setup nginx directories
-  > Distinguish between production & development    In Progress
-    setup/deployment scripts
 
 
-- Get server up and running                         Done
+- Get server up and running    
+                     Done
   > Create java project                             Done
   > Create server using netty                       Done
   > Create web API handler                          Done
@@ -39,6 +34,7 @@ Sprint Backlog                                           Status
 
 
 - Create a database                                 Done
+
   > Determine database to use                       Done
   > Use mysql                                       Done
   > Obtain JDBC connector for mysql                 Done
@@ -50,12 +46,9 @@ Sprint Backlog                                           Status
 
 
 
-- Add authorization capabilities                    In Progress
-  > Determine encyption hash, MD5 or SHA1           In Progress
-  > Determine salt, fixed, random, both             Not Started
-  > Determine iteration count (1000+)               Not Started
+- Add authorization capabilities                    Not finished
+
   > Add users table to database                     Done
   > Determine columns for users table               Done
   > Add add user registration web API               Done
-  > Add user deregistration web API                 In Progress
   

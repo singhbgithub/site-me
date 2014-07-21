@@ -1,0 +1,34 @@
+Sprint Period:
+Sunday, July 21st
+Saturday, August 2nd
+
+Sprint Backlog                                           Status
+---------------------------------------------------------------
+- Finish setup for development environment
+
+  > Build using ant                                 Not Started
+  > Test-driven development                         Not Started
+  > Make setup script                               Not Started
+    * setup nginx directories
+  > Distinguish between production & development    Not Started
+    setup/deployment scripts
+
+
+
+- Finish Authorization
+
+  > Use encrypted passwords
+    * Determine encyption hash, MD5 or SHA1         Not Started
+    * Determine salt, fixed, random, both           Not Started
+    * Determine iteration count (1000+)             Not Started
+  > Add user deregistration web API                 In Progress
+
+
+- Do test driven development                        Not Started
+
+  > Determine how this can be done                  Not Started
+  > Test web interface                              Not Started
+  > Test server performance                         Not Started
+  
+- Update scrum to show effort level, and            Not Started
+  scrum velocity
