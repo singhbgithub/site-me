@@ -17,11 +17,13 @@ Sprint Backlog                                           Status
 
 - Finish Authorization
 
-  > Use encrypted passwords
-    * Determine encyption hash, MD5 or SHA1         Not Started
+  > Use hashed passwords                            Not Started
+    * Determine  hash, MD5 or SHA1                  Not Started
     * Determine salt, fixed, random, both           Not Started
     * Determine iteration count (1000+)             Not Started
   > Add user deregistration web API                 In Progress
+    * Delete user functionality                     Done
+    * Delete user matching e-mail or username       Not Started
 
 
 - Do test driven development                        Not Started

@@ -49,7 +49,7 @@ var showMusicWithSwag = function() {
 var test = function() {
     $("#test").submit(function(evnt) {
         evnt.preventDefault();
-        var uri = "/pass/admin/reset";
+        var uri = "/pass/admin/create";
         var user = $("#test input[name='user']").val();
         var password = $("#test input[name='p1']").val(); // TODO add pass check
         var email = $("#test input[name='email']").val();
@@ -60,6 +60,8 @@ var test = function() {
         });
         var callback = function(response) {
             alert(response);
+            uri = "/pass/admin/delete";
+            $.post(uri, data, function(response) { alert(response); } );
         };
         $.post(uri, data, callback);
     });

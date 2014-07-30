@@ -14,7 +14,9 @@ import database.types.UserData;
 import database.types.UserData.PasswordException;
 
 /**
- * This class handles incoming requests dealing with user creation.
+ * This class handles incoming requests dealing with user registration.
+ * 
+ * Change name to UserRegistration.
  */
 public final class UserCreator extends Responder {
 
@@ -24,10 +26,18 @@ public final class UserCreator extends Responder {
 			
 			JsonParser parser = new JsonParser();
 			JsonObject json = parser.parse(content).getAsJsonObject();
+			String uri = req.getUri();
 			
 			// attempt to add a new user with posted content
-			UserData.registerUser(json);
-			sendHttpResponse(ctx, req, "Added user!");
+			if (uri.equals("/admin/create")) {
+				UserData.registerUser(json);
+				sendHttpResponse(ctx, req, "Added user!");
+			}
+			// attempt to delete user with posted content
+			else {
+				UserData.unregisterUser(json);
+				sendHttpResponse(ctx, req, "Removed user!");
+			}
 
 			// could not parse posted content
 		} catch (JsonParseException e) {

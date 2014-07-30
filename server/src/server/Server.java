@@ -26,7 +26,13 @@ public final class Server {
     // map of supported URIs (API calls)
     final Map<String, Responder> uris;
 
-    // initialize server on a port, and supported APIs
+    /**
+     *  Initialize a server port and supported web APIs.
+     * @param port
+     * 			The port to run the server on.
+     * @param uris
+     * 			A map containing the supported RESTFUL web APIs.
+     */
     public Server(int port, Map<String, Responder> uris) {
     	this.port = port;
     	this.uris = uris;

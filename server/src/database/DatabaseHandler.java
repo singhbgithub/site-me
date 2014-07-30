@@ -158,6 +158,8 @@ public final class DatabaseHandler {
 	 * 		The WHERE clause.
 	 * @throws SQLException 
 	 * 		If a SQL Error occurs.
+	 * 
+	 * TODO support joins (should use String[] tables)
 	 */
 	public static void deleteRecords(String table, String where) throws SQLException {
 			StringBuilder sql = new StringBuilder();
@@ -180,6 +182,7 @@ public final class DatabaseHandler {
 	 * 		The WHERE clause.
 	 * @throws SQLException 
 	 * 		If a SQL Error occurs.
+	 * TODO support joins (String[] tables)
 	 */
 	public static void updateRecords(String table, String[] cols, String[] vals, String where) throws SQLException {
 			StringBuilder sql = new StringBuilder();

@@ -85,6 +85,52 @@ public final class UserData implements DatabaseTable {
 	}
 	
 	/**
+	 * Unregisters a new user with the given {@link com.google.gson.JsonObject}.
+	 * If the user or email is not registered or the passwords do not match,
+	 * an error is thrown.
+	 * @param json
+	 * 		A {@link com.google.gson.JsonObject} that should contain
+	 * 		"username", "password", and "email" key bindings.
+	 * @return 
+	 * 		True if the user was successfully unregistered.
+	 * @throws PasswordException
+	 * 		If the "password" key is not between 8 and 32 characters.
+	 * @throws SQLException 
+	 * 		If a SQL error occurs
+	 * @throws IllegalArgumentException
+	 * 		If the json does not contain the "username", "password",
+	 * 		and "email" key bindings.
+	 * 
+	 * TODO hash passwords, and use base64 encoder
+	 * TODO unregister using username or email, both not required
+	 */
+	public static void unregisterUser(JsonObject json)
+			throws PasswordException, SQLException, IllegalArgumentException {
+		
+		// check for valid key bindings
+		if (json.has(USERNAME) && json.has(PASSWORD) && json.has(EMAIL)) {
+
+			String username = json.get(USERNAME).getAsString();
+			String password = json.get(PASSWORD).getAsString();
+			String email = json.get(EMAIL).getAsString();
+			
+			String where = USERNAME + "=\"" + username + "\" AND "
+					+ PASSWORD + "=\"" + password + "\" AND " 
+					+ EMAIL + "=\"" + email + "\"";
+			
+			// add record to table
+			DatabaseHandler.deleteRecords(TABLE_NAME, where);
+
+		}
+		else {
+			throw new IllegalArgumentException(
+					String.format("%s does not contain the keys: '%s', '%s', '%s'",
+							json, USERNAME, PASSWORD, EMAIL));
+		}
+				
+	}
+	
+	/**
 	 * The exception to be thrown when a password is invalid.
 	 */
 	public static class PasswordException extends Exception {
