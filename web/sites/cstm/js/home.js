@@ -12,8 +12,10 @@ var MILLIS_TO_SECS = 1000;
   Main start script
 */
 $(document).ready(function() {
+    validateLogin();
+    registerUser();
+    unregisterUser();
     startSlideShow();
-    test();
 });
 
 /* 
@@ -37,31 +39,72 @@ var startSlideShow = function() {
 };
 
 /*
-  Show the spotify music player with some swag
+  Validate user credentials. Load content is valid.
 */
-var showMusicWithSwag = function() {
-
+var validateLogin = function() {
+    $("#login").submit(function(event) {
+       var uri = "/pass/admin/login";
+       var user = $("#login input[name='user']").val();
+       var password = $("#login input[name='password']").val();
+       var email = $("#login input[name='email']").val();
+       var data = {
+         "username": user,
+         "password": password,
+         "email": email 
+       };
+       var callback = function(response) {
+           alert(response);
+       };
+       $.post(uri, data, callback);
+    });
 };
 
 /*
-  FIXME this function belongs in another file
+  Register new user.
 */
-var test = function() {
-    $("#test").submit(function(evnt) {
+var registerUser = function() {
+    $("#register").submit(function(evnt) {
         evnt.preventDefault();
         var uri = "/pass/admin/create";
-        var user = $("#test input[name='user']").val();
-        var password = $("#test input[name='p1']").val(); // TODO add pass check
-        var email = $("#test input[name='email']").val();
+        var user = $("#register input[name='user']").val(); // TODO change to this instead of #register
+        var password = $("#register input[name='p1']").val();
+        var password2 = $("#register input[name='p2']").val();
+        // passwords don't match
+        if (password !== password2) {
+            alert("Passwords do not match.");
+        }
+        else {
+            var email = $("#register input[name='email']").val();
+            var data = JSON.stringify({
+                "username": user,
+                "password": password,
+                "email": email
+            });
+            var callback = function(response) {
+                alert(response);
+            };
+            $.post(uri, data, callback);
+        }
+    });
+};
+
+/*
+  Unregister an existing user.
+*/
+var unregisterUser = function() {
+    $("#unregister").submit(function(evnt) {
+        evnt.preventDefault();
+        var uri = "/pass/admin/delete";
+        var user = $("#unregister input[name='user']").val();
+        var password = $("#unregister input[name='password']").val(); // TODO add pass check
+        var email = $("#unregister input[name='email']").val();
         var data = JSON.stringify({
             "username": user,
-            "password":password,
-            "email":email
+            "password": password,
+            "email": email
         });
         var callback = function(response) {
             alert(response);
-            uri = "/pass/admin/delete";
-            $.post(uri, data, function(response) { alert(response); } );
         };
         $.post(uri, data, callback);
     });
