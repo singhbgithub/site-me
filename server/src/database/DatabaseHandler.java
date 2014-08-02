@@ -183,13 +183,31 @@ public final class DatabaseHandler {
 	 * @throws SQLException 
 	 * 		If a SQL Error occurs.
 	 * TODO support joins (String[] tables)
+	 * TODO update values
 	 */
-	public static void updateRecords(String table, String[] cols, String[] vals, String where) throws SQLException {
-			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE FROM ").append(table)
-			.append(" WHERE ").append(where);
-			PreparedStatement stmt = conn.prepareStatement(sql.toString());
-			stmt.execute();
+	public static void updateRecords(String table, String[] cols, String[] vals, String where) 
+			throws Exception, SQLException {
+		
+		if (vals.length != cols.length) {
+			throw new Exception("Invalid: cols don't match vals."); // TODO more specific
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		// convert vals array to CSV String
+		for (int i = 0; i < vals.length; i++) {
+			if (sb.length() > 0) { // TODO change to i
+				sb.append(",");
+			}
+			sb.append(cols[i] + "=\"" + vals[i] + "\"");
+		}
+		String set = sb.toString();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE ").append(table)
+		.append(" SET ").append(set)
+		.append(" WHERE ").append(where);
+		PreparedStatement stmt = conn.prepareStatement(sql.toString());
+		stmt.execute();
 	}
 	
 }

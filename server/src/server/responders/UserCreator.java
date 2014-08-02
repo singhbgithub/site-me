@@ -33,8 +33,13 @@ public final class UserCreator extends Responder {
 				UserData.registerUser(json);
 				sendHttpResponse(ctx, req, "Added user!");
 			}
+			// attempt to update a user
+			else if (uri.equals("/admin/update")) {
+				UserData.updateUser(json);
+				sendHttpResponse(ctx, req, "Updated user!");
+			}
 			// attempt to delete user with posted content
-			else {
+			else if (uri.equals("/admin/delete")) {
 				UserData.unregisterUser(json);
 				sendHttpResponse(ctx, req, "Removed user!");
 			}

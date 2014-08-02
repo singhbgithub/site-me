@@ -16,8 +16,10 @@ public final class URIMapper {
 	// prevent instantiation by other classes
 	private URIMapper() {
 		URIS = new HashMap<String, Responder>();
-		URIS.put("/admin/create", new UserCreator()); // TODO wildcard
-		URIS.put("/admin/delete", new UserCreator());
+		UserCreator userRegistrationHandler = new UserCreator();
+		URIS.put("/admin/create", userRegistrationHandler);
+		URIS.put("/admin/delete", userRegistrationHandler);
+		URIS.put("/admin/update", userRegistrationHandler);
 	}
 	
 	/**
