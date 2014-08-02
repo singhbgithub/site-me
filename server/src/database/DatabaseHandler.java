@@ -186,10 +186,10 @@ public final class DatabaseHandler {
 	 * TODO update values
 	 */
 	public static void updateRecords(String table, String[] cols, String[] vals, String where) 
-			throws Exception, SQLException {
+			throws IllegalArgumentException, SQLException {
 		
 		if (vals.length != cols.length) {
-			throw new Exception("Invalid: cols don't match vals."); // TODO more specific
+			throw new IllegalArgumentException("Invalid: cols don't match vals.");
 		}
 		
 		StringBuilder sb = new StringBuilder();
