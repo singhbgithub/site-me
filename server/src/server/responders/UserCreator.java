@@ -16,7 +16,7 @@ import database.types.UserData.PasswordException;
 /**
  * This class handles incoming requests dealing with user registration.
  * 
- * Change name to UserRegistration.
+ * Change name to UserRegistrationResponder. TODO
  */
 public final class UserCreator extends Responder {
 
@@ -28,8 +28,12 @@ public final class UserCreator extends Responder {
 			JsonObject json = parser.parse(content).getAsJsonObject();
 			String uri = req.getUri();
 			
+			// attempt to log the user in
+			if (uri.equals("/admin/login")) {
+				sendHttpResponse(ctx, req, "Logged In."); // TODO not done
+			}
 			// attempt to add a new user with posted content
-			if (uri.equals("/admin/create")) {
+			else if (uri.equals("/admin/create")) {
 				UserData.registerUser(json);
 				sendHttpResponse(ctx, req, "Added user!");
 			}
@@ -42,6 +46,9 @@ public final class UserCreator extends Responder {
 			else if (uri.equals("/admin/delete")) {
 				UserData.unregisterUser(json);
 				sendHttpResponse(ctx, req, "Removed user!");
+			}
+			else {
+				sendHttpError(ctx, req, "Unsupported API call.");
 			}
 
 			// could not parse posted content

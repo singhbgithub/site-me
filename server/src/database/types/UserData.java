@@ -1,6 +1,7 @@
 package database.types;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import com.google.gson.JsonObject;
 
@@ -22,6 +23,8 @@ public final class UserData implements DatabaseTable {
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
 	private static final String EMAIL = "email";
+	// convenience constant
+	private static final String NEW = "new";
 	
 	@Override
 	public String getSchema() {
@@ -160,14 +163,32 @@ public final class UserData implements DatabaseTable {
 			String password = json.get(PASSWORD).getAsString();
 			String email = json.get(EMAIL).getAsString();
 			
+			// key's whose values should be updated in the database
+			HashMap<String, String> setValues = new HashMap<String, String>();
+			
+			// update password
+			if (json.has(NEW + PASSWORD)) {
+				
+				String newPassword = json.get(NEW + PASSWORD).getAsString();
+				setValues.put(PASSWORD, newPassword);
+				
+			}
+
+			// update email
+			if (json.has(NEW + EMAIL)) {
+				
+				String newEmail = json.get(NEW + EMAIL).getAsString();
+				setValues.put(EMAIL, newEmail);
+				
+			}
+			
 			String where = USERNAME + "=\"" + username + "\" AND "
 					+ PASSWORD + "=\"" + password + "\" AND " 
 					+ EMAIL + "=\"" + email + "\"";
 			
 			// add record to table
 			DatabaseHandler.updateRecords(TABLE_NAME,
-					new String[] {USERNAME, PASSWORD, EMAIL},
-					new String[] {username, password, email},
+					setValues,
 					where);
 
 		}

@@ -99,7 +99,19 @@
       <input type="text" pattern=".{6,15}" name="user" placeholder="username" required>
       <input type="password" pattern=".{8,32}" name="password" placeholder="password" required>
       <input type="email" name="email" placeholder="email" required>
-      <input type="submit" value="Delete Accont">
+      <input type="submit" value="Delete Account">
+    </form>
+  </body>
+
+<!-- Update login form -->
+    <form id="updatelogin">
+      <!-- should be enforced in the server TODO -->
+      <input type="text" pattern=".{6,15}" name="user" placeholder="username" required>
+      <input type="password" pattern=".{8,32}" name="password" placeholder="password" required>
+      <input type="password" pattern=".{8,32}" name="newpassword" placeholder="new password" required>
+      <input type="email" name="email" placeholder="email" required>
+      <input type="email" name="newemail" placeholder="new email" required>
+      <input type="submit" value="Update Account">
     </form>
   </body>
 

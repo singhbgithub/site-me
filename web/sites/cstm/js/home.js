@@ -15,6 +15,7 @@ $(document).ready(function() {
     validateLogin();
     registerUser();
     unregisterUser();
+    updateUser();
     startSlideShow();
 });
 
@@ -102,6 +103,32 @@ var unregisterUser = function() {
             "username": user,
             "password": password,
             "email": email
+        });
+        var callback = function(response) {
+            alert(response);
+        };
+        $.post(uri, data, callback);
+    });
+};
+
+/*
+  Update user account information.
+*/
+var updateUser = function() {
+    $("#updatelogin").submit(function(evnt) {
+        evnt.preventDefault();
+        var uri = "/pass/admin/update";
+        var user = $("#updatelogin input[name='user']").val();
+        var password = $("#updatelogin input[name='password']").val();
+        var newpassword = $("#updatelogin input[name='newpassword']").val();
+        var email = $("#updatelogin input[name='email']").val();
+        var newemail = $("#updatelogin input[name='newemail']").val();
+        var data = JSON.stringify({
+            "username": user,
+            "password": password,
+            "email": email,
+            "newpassword": newpassword,
+            "newemail": newemail
         });
         var callback = function(response) {
             alert(response);

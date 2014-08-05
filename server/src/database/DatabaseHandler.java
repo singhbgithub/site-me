@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import database.types.UserData;
 
@@ -112,7 +114,7 @@ public final class DatabaseHandler {
 	
 	/**
 	 * Adds a record with the specified values to the named table.
-	 * The size of the cols and vals arrays should be equivalent.
+	 * The size of the cols and vals arrays should be equivalent. TODO change to HashMap
 	 * @param table
 	 * 		The table to add the record to.
 	 * @param cols
@@ -182,29 +184,24 @@ public final class DatabaseHandler {
 	 * 		The WHERE clause.
 	 * @throws SQLException 
 	 * 		If a SQL Error occurs.
-	 * TODO support joins (String[] tables)
-	 * TODO update values
 	 */
-	public static void updateRecords(String table, String[] cols, String[] vals, String where) 
+	public static void updateRecords(String table, HashMap<String, String> setValues, String where) 
 			throws IllegalArgumentException, SQLException {
 		
-		if (vals.length != cols.length) {
-			throw new IllegalArgumentException("Invalid: cols don't match vals.");
-		}
-		
-		StringBuilder sb = new StringBuilder();
+		// The key/value bindings as a well formatted mysql string
+		StringBuilder set = new StringBuilder();
 		// convert vals array to CSV String
-		for (int i = 0; i < vals.length; i++) {
-			if (sb.length() > 0) { // TODO change to i
-				sb.append(",");
+		for (Entry<String, String> e : setValues.entrySet()) {
+			if (set.length() > 0) {
+				set.append(",");
 			}
-			sb.append(cols[i] + "=\"" + vals[i] + "\"");
+			set.append(e.getKey() + "=\"" + e.getValue() + "\"");
 		}
-		String set = sb.toString();
 		
+		// The update query to execute
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE ").append(table)
-		.append(" SET ").append(set)
+		.append(" SET ").append(set.toString())
 		.append(" WHERE ").append(where);
 		PreparedStatement stmt = conn.prepareStatement(sql.toString());
 		stmt.execute();

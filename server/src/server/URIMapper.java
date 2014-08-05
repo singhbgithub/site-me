@@ -20,6 +20,7 @@ public final class URIMapper {
 		URIS.put("/admin/create", userRegistrationHandler);
 		URIS.put("/admin/delete", userRegistrationHandler);
 		URIS.put("/admin/update", userRegistrationHandler);
+		URIS.put("/admin/login", userRegistrationHandler);
 	}
 	
 	/**
